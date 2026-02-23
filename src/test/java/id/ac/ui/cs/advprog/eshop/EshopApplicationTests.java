@@ -1,13 +1,16 @@
 package id.ac.ui.cs.advprog.eshop;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class EshopApplicationTests {
 
+
     @Test
     void contextLoads() {
+        // Walaupun kosong, test ini memastikan context loads berjalan
     }
 
     @Test
