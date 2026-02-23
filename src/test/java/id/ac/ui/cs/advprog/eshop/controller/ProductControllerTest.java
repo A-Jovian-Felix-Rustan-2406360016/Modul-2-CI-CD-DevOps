@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean; // Diperbarui untuk Spring Boot 3.5+
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
@@ -18,15 +18,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(ProductController.class)
 class ProductControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
-
-    @MockitoBean // Menggantikan @MockBean yang deprecated
+    @MockitoBean
     private ProductService productService;
-
     private Product product;
-
     @BeforeEach
     void setUp() {
         product = new Product();
@@ -39,7 +35,7 @@ class ProductControllerTest {
     void testCreateProductPage() throws Exception {
         mockMvc.perform(get("/product/create"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("CreateProduct")) // Sesuaikan kapital: 'C'
+                .andExpect(view().name("CreateProduct"))
                 .andExpect(model().attributeExists("product"));
     }
 
@@ -58,7 +54,7 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/product/list"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("ProductList")) // Sesuaikan kapital: 'P' dan 'L'
+                .andExpect(view().name("ProductList"))
                 .andExpect(model().attributeExists("products"));
     }
 
@@ -68,7 +64,7 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/product/edit/123"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("EditProduct")) // Sudah benar sesuai file
+                .andExpect(view().name("EditProduct"))
                 .andExpect(model().attributeExists("product"));
     }
 
