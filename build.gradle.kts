@@ -1,8 +1,9 @@
 plugins {
     java
     jacoco
-    id("org.springframework.boot") version "3.5.10"
+    id("org.springframework.boot") version "3.4.1"
     id("io.spring.dependency-management") version "1.1.7"
+    id("org.sonarqube") version "4.4.1.3373"
 }
 
 val seleniumJavaVersion = "4.14.1"
@@ -16,6 +17,15 @@ description = "eshop"
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "A-Jovian-Felix-Rustan-2406360016_Modul-2-CI-CD-DevOps")
+        property("sonar.organization", "a-jovian-felix-rustan-2406360016")
+        property("sonar.host.url", "https://sonarcloud.io")
     }
 }
 
@@ -76,4 +86,8 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
 }

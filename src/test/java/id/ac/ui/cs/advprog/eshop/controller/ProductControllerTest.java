@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean; // Diperbarui untuk Spring Boot 3.5+
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
@@ -22,10 +22,10 @@ class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean // Menggantikan @MockBean yang deprecated
     private ProductService productService;
 
-    Product product;
+    private Product product;
 
     @BeforeEach
     void setUp() {
@@ -39,7 +39,7 @@ class ProductControllerTest {
     void testCreateProductPage() throws Exception {
         mockMvc.perform(get("/product/create"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("createProduct"))
+                .andExpect(view().name("CreateProduct")) // Sesuaikan kapital: 'C'
                 .andExpect(model().attributeExists("product"));
     }
 
@@ -58,7 +58,7 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/product/list"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("productList"))
+                .andExpect(view().name("ProductList")) // Sesuaikan kapital: 'P' dan 'L'
                 .andExpect(model().attributeExists("products"));
     }
 
@@ -68,7 +68,7 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/product/edit/123"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("EditProduct"))
+                .andExpect(view().name("EditProduct")) // Sudah benar sesuai file
                 .andExpect(model().attributeExists("product"));
     }
 
